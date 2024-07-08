@@ -7,6 +7,10 @@ import Capacitor
  */
 @objc({{{ CLASS }}}Plugin)
 public class {{{ CLASS }}}Plugin: CAPPlugin, CAPBridgedPlugin {
+    override public func load() {
+        log("Loading plugin")
+    }
+    
     public let identifier = "{{{ CLASS }}}Plugin"
     public let jsName = "{{{ CLASS }}}"
     public let pluginMethods: [CAPPluginMethod] = [
@@ -15,6 +19,7 @@ public class {{{ CLASS }}}Plugin: CAPPlugin, CAPBridgedPlugin {
     private let implementation = {{{ CLASS }}}()
 
     @objc func echo(_ call: CAPPluginCall) {
+        log("echo")
         let value = call.getString("value") ?? ""
         call.resolve([
             "value": implementation.echo(value)

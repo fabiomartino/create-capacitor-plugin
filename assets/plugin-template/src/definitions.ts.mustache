@@ -1,3 +1,18 @@
+/**
+ * @file definitions.ts
+ * This file contains the definitions for a custom Capacitor plugin named {{ CLASS }}Plugin.
+ */
+
+/**
+ * Interface representing the Capacitor {{ CLASS }} Plugin.
+ */
 export interface {{ CLASS }}Plugin {
+  /**
+   * Echoes a value back.
+   * @param options - An object containing a `value` property.
+   * @returns A promise resolving to an object with the echoed value.
+   *
+   * @since 1.0.0
+   */
   echo(options: { value: string }): Promise<{ value: string }>;
 }

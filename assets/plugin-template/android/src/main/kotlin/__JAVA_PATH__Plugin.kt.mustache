@@ -1,0 +1,31 @@
+package {{ PACKAGE_ID }}
+
+import com.getcapacitor.Logger
+import com.getcapacitor.JSObject
+import com.getcapacitor.Plugin
+import com.getcapacitor.PluginCall
+import com.getcapacitor.PluginMethod
+import com.getcapacitor.annotation.CapacitorPlugin
+
+@CapacitorPlugin(name = "{{ CLASS }}")
+class {{ CLASS }}Plugin : Plugin() {
+
+    companion object {
+        const val TAG = "INFO"
+    }
+
+    override fun load() {
+        Logger.info("Loading {{ CLASS }} plugin")
+    }
+
+    private val implementation = {{ CLASS }}()
+
+    @PluginMethod
+    fun echo(call: PluginCall) {
+        Logger.debug(TAG,"echo")
+        val value = call.getString("value")
+        val ret = JSObject()
+        ret.put("value", implementation.echo(value!!))
+        call.resolve(ret)
+    }
+}
