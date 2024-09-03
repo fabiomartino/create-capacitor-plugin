@@ -1,7 +1,51 @@
+/// <reference types="@capacitor/cli" />
+
+declare module '@capacitor/cli' {
+  export interface PluginsConfig {
+    /**
+     * These configuration values are available:
+     */
+    {{ CLASS }}?: {
+      /**
+       * Test echo value of your project.
+       * 
+       * @since 1.0.0
+       * @default ""
+       * @example "A string to be displayed"
+       */
+      testEcho?: string;
+    };
+  }
+}
+
 /**
  * @file definitions.ts
  * This file contains the definitions for a custom Capacitor plugin named {{ CLASS }}Plugin.
  */
+import { PluginListenerHandle } from '@capacitor/core'
+
+export interface ActionInfo {
+  /**
+   * String action performed.
+   *
+   * @since 1.0.0
+   */
+  stringPerformed: string;
+
+  /**
+   * Number action performed.
+   *
+   * @since 1.0.0
+   */
+  numberPerformed: number;
+
+  /**
+   * Boolean action performed.
+   *
+   * @since 1.0.0
+   */
+  booleanPerformed: boolean;
+}
 
 /**
  * Interface representing the Capacitor {{ CLASS }} Plugin.
@@ -15,4 +59,21 @@ export interface {{ CLASS }}Plugin {
    * @since 1.0.0
    */
   echo(options: { value: string }): Promise<{ value: string }>;
+
+  /**
+   * Listens for this plugin.
+   *
+   * @since 1.0.0
+   */
+  addListener(
+    eventName: 'exampleListener',
+    listenerFunc: (info: ActionInfo) => void,
+  ): Promise<PluginListenerHandle>;
+
+  /**
+   * Remove all native listeners for this plugin.
+   *
+   * @since 1.0.0
+   */
+  removeAllListeners(): Promise<void>;
 }

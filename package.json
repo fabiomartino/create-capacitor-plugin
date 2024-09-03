@@ -1,6 +1,6 @@
 {
   "name": "@capacitor/create-plugin",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "description": "Generate a new Capacitor plugin",
   "author": "Ionic Team <hi@ionicframework.com>",
   "homepage": "https://capacitorjs.com",
@@ -21,7 +21,8 @@
     "clean": "rimraf ./dist",
     "watch": "tsc -w",
     "release": "np --no-tests",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "local-pack": "npm pack"
   },
   "files": [
     "assets/plugin-template.tar.gz",
@@ -63,7 +64,7 @@
     "@types/prompts": "^2.4.9",
     "@types/tar": "^6.1.13",
     "eslint": "^8.57.0",
-    "np": "^10.0.5",
+    "np": "^10.0.7",
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
     "typescript": "~5.1.0"
