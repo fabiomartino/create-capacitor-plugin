@@ -1,6 +1,6 @@
 {
   "name": "@capacitor/create-plugin",
-  "version": "0.15.2",
+  "version": "0.15.6",
   "description": "Generate a new Capacitor plugin",
   "author": "Ionic Team <hi@ionicframework.com>",
   "homepage": "https://capacitorjs.com",
@@ -65,8 +65,8 @@
     "@types/tar": "^6.1.13",
     "eslint": "^8.57.0",
     "np": "^10.0.7",
-    "prettier": "^3.1.1",
-    "rimraf": "^5.0.5",
+    "prettier": "3.3.3",
+    "rimraf": "5.0.10",
     "typescript": "~5.4.5"
   }
 }

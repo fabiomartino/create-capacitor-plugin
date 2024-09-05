@@ -10,6 +10,7 @@ const help = `
     --author <author> ......... Author name and email (e.g. "Name <name@example.com>")
     --license <id> ............ SPDX License ID (e.g. "MIT")
     --description <text> ...... Short description of plugin features
+    --kotlin .................. Use Kotlin for the Android code instead of Java
 
     -h, --help ................ Print help, then quit
     --verbose ................. Print verbose output to stderr

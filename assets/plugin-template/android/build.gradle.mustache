@@ -6,8 +6,10 @@ ext {
 }
 
 buildscript {
+{{#kotlin}}
     ext.kotlinVersion = project.hasProperty('kotlinVersion') ? rootProject.ext.kotlinVersion : '2.0.20'
     ext.coreKtx = project.hasProperty('coreKtx') ? rootProject.ext.coreKtx : '1.13.1'
+{{/kotlin}}
 
     repositories {
         google()
@@ -19,7 +21,9 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
+{{#kotlin}}
 apply plugin: 'kotlin-android'
+{{/kotlin}}
 
 android {
     namespace "{{ PACKAGE_ID }}"
@@ -44,9 +48,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    {{#kotlin}}
     kotlinOptions {
         jvmTarget = 17
     }
+    {{/kotlin}}
 }
 
 repositories {
@@ -62,6 +68,8 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+{{#kotlin}}
     implementation "androidx.core:core-ktx:$coreKtx"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+{{/kotlin}}
 }

@@ -46,7 +46,8 @@ export const run = async (): Promise<void> => {
     process.exit(1);
   }
 
-  await extractTemplate(dir, details, 'PLUGIN_TEMPLATE');
+  const templateType: 'PLUGIN_TEMPLATE' | 'WWW_TEMPLATE' = 'PLUGIN_TEMPLATE';
+  await extractTemplate(dir, details, templateType);
 
   process.stdout.write('Installing dependencies. Please wait...\n');
 
@@ -112,7 +113,11 @@ export const run = async (): Promise<void> => {
     });
 
     // Add Android
-    await runSubprocess('npx', ['cap', 'add', 'android'], {
+    const androidAddArgs = ['cap', 'add', 'android'];
+    if (details.kotlin) {
+      androidAddArgs.push('--kotlin');
+    }
+    await runSubprocess('npx', androidAddArgs, {
       ...opts,
       cwd: resolve(details.dir, 'example'),
     });

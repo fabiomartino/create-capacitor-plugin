@@ -5,12 +5,11 @@ import tar from 'tar';
 
 import type { OptionValues } from './options';
 
+export const CAPACITOR_VERSION = '^6.1.2'; // Exporta CAPACITOR_VERSION
+
 const MUSTACHE_EXTENSION = '.mustache';
-
-export const CAPACITOR_VERSION = '^6.1.2';
-
 const TEMPLATE_PATH = resolve(__dirname, '..', 'assets', 'plugin-template.tar.gz');
-
+const TEMPLATE_PATH_KOTLIN = resolve(__dirname, '..', 'assets', 'plugin-template-kotlin.tar.gz');
 const WWW_TEMPLATE_PATH = resolve(__dirname, '..', 'assets', 'www-template.tar.gz');
 
 export const readPackageJson = async (p: string): Promise<{ [key: string]: any }> => {
@@ -26,8 +25,13 @@ export const extractTemplate = async (
   const templateFiles: string[] = [];
   const templateFolders: string[] = [];
   await mkdir(dir, { recursive: true });
+
+  const isKotlin = details['kotlin'] === true; // Asegúrate de que `details['kotlin']` sea un booleano
+
   await tar.extract({
-    file: type === 'PLUGIN_TEMPLATE' ? TEMPLATE_PATH : WWW_TEMPLATE_PATH,
+    file: type === 'PLUGIN_TEMPLATE' 
+      ? (isKotlin ? TEMPLATE_PATH_KOTLIN : TEMPLATE_PATH) 
+      : WWW_TEMPLATE_PATH,
     cwd: dir,
     filter: (p) => {
       if (p.endsWith(MUSTACHE_EXTENSION)) {

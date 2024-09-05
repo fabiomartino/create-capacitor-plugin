@@ -1,5 +1,4 @@
 import Debug from 'debug';
-
 import { getOptionValue } from './cli';
 
 const debug = Debug('@capacitor/create-plugin:options');
@@ -17,6 +16,7 @@ export interface OptionValues {
   author: string;
   license: string;
   description: string;
+  kotlin: boolean;
 }
 
 export type Validators = {
@@ -24,8 +24,7 @@ export type Validators = {
 };
 
 const CLI_ARGS = ['dir'] as const;
-
-const CLI_OPTIONS = ['name', 'package-id', 'class-name', 'repo', 'author', 'license', 'description'] as const;
+const CLI_OPTIONS = ['name', 'package-id', 'class-name', 'repo', 'author', 'license', 'description', 'kotlin'] as const;
 
 export const VALIDATORS: Validators = {
   name: (value) =>
@@ -63,6 +62,18 @@ export const VALIDATORS: Validators = {
       : /^-/.test(value)
         ? 'Directories should not start with a hyphen.'
         : true,
+  kotlin: (value) => {
+    if (typeof value !== 'string' || value.trim().length === 0) {
+      return true;
+    }
+
+    const lowerValue = value.toLowerCase();
+    if (lowerValue === 'true' || lowerValue === 'false') {
+      return true;
+    }
+
+    return `Must be either "true" or "false"`;
+  },
 };
 
 export const getOptions = (): Options => {
@@ -87,7 +98,14 @@ export const getOptions = (): Options => {
       debug(`invalid option: --%s %O: %s`, option, value, validatorResult);
     }
 
-    opts[option] = validatorResult === true ? value : undefined;
+    // Convert 'kotlin' to boolean if valid
+    if (option === 'kotlin') {
+      opts[option] = validatorResult === true
+        ? value?.toLowerCase() === 'true' ? 'true' : 'false'
+        : undefined;
+    } else {
+      opts[option] = validatorResult === true ? value : undefined;
+    }
 
     return opts;
   }, {} as Options);

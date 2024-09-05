@@ -88,6 +88,14 @@ export const gatherDetails = (initialOptions: Options): Promise<OptionValues> =>
         validate: VALIDATORS.description,
         format: (value) => value.trim(),
       },
+      {
+        type: 'toggle',
+        name: 'kotlin',
+        message: `Do you want to use Kotlin instead of Java for the Android code?\n`,
+        initial: false,
+        active: 'Yes',
+        inactive: 'No',
+      },
     ],
     {
       onCancel: async () => {
