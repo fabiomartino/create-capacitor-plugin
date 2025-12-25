@@ -1,0 +1,28 @@
+// swift-tools-version: 5.9
+import PackageDescription
+
+let package = Package(
+    name: "<%- locals.nativeName %>",
+    platforms: [.iOS(.v15)],
+    products: [
+        .library(
+            name: "<%- locals.nativeName %>",
+            targets: ["<%- locals.class %>Plugin"])
+    ],
+    dependencies: [
+        .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "<%- locals.capacitorVersion %>")
+    ],
+    targets: [
+        .target(
+            name: "<%- locals.class %>Plugin",
+            dependencies: [
+                .product(name: "Capacitor", package: "capacitor-swift-pm"),
+                .product(name: "Cordova", package: "capacitor-swift-pm")
+            ],
+            path: "ios/Sources/<%- locals.class %>Plugin"),
+        .testTarget(
+            name: "<%- locals.class %>PluginTests",
+            dependencies: ["<%- locals.class %>Plugin"],
+            path: "ios/Tests/<%- locals.class %>PluginTests")
+    ]
+)

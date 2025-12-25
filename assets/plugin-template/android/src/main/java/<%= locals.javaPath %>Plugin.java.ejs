@@ -1,4 +1,4 @@
-package {{ PACKAGE_ID }};
+package <%- locals.packageId %>;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -6,10 +6,10 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
-@CapacitorPlugin(name = "{{ CLASS }}")
-public class {{ CLASS }}Plugin extends Plugin {
+@CapacitorPlugin(name = "<%- locals.class %>")
+public class <%- locals.class %>Plugin extends Plugin {
 
-    private {{ CLASS }} implementation = new {{ CLASS }}();
+    private <%- locals.class %> implementation = new <%- locals.class %>();
 
     @PluginMethod
     public void echo(PluginCall call) {

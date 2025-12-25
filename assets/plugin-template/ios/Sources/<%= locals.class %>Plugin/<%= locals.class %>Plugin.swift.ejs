@@ -5,17 +5,17 @@ import Capacitor
  * Please read the Capacitor iOS Plugin Development Guide
  * here: https://capacitorjs.com/docs/plugins/ios
  */
-@objc({{{ CLASS }}}Plugin)
-public class {{{ CLASS }}}Plugin: CAPPlugin, CAPBridgedPlugin {
-    public let identifier = "{{{ CLASS }}}Plugin"
-    public let jsName = "{{{ CLASS }}}"
+@objc(<%- locals.class %>Plugin)
+public class <%- locals.class %>Plugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "<%- locals.class %>Plugin"
+    public let jsName = "<%- locals.class %>"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "echo", returnType: CAPPluginReturnPromise)
     ]
-    private let implementation = {{{ CLASS }}}()
+    private let implementation = <%- locals.class %>()
 
     @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
+        let value = call.getString("value", "")
         call.resolve([
             "value": implementation.echo(value)
         ])

@@ -1,8 +1,8 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { {{{ CLASS }}}Plugin } from './definitions';
+import type { <%- locals.class %>Plugin } from './definitions';
 
-export class {{{ CLASS }}}Web extends WebPlugin implements {{{ CLASS }}}Plugin {
+export class <%- locals.class %>Web extends WebPlugin implements <%- locals.class %>Plugin {
   async echo(options: { value: string }): Promise<{ value: string }> {
     console.log('ECHO', options);
     return options;

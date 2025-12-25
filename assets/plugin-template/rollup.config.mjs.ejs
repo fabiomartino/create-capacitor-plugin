@@ -4,7 +4,7 @@ export default {
     {
       file: 'dist/plugin.js',
       format: 'iife',
-      name: 'capacitor{{{ CLASS }}}',
+      name: 'capacitor<%- locals.class %>',
       globals: {
         '@capacitor/core': 'capacitorExports',
       },

@@ -1,7 +1,7 @@
 {
-  "name": "{{{ PACKAGE_NAME }}}",
+  "name": "<%- locals.packageName %>",
   "version": "0.0.1",
-  "description": "{{{ DESCRIPTION }}}",
+  "description": "<%- locals.description %>",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -13,19 +13,19 @@
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
-    "{{{ NATIVE_NAME }}}.podspec"
+    "<%- locals.nativeName %>.podspec"
   ],
-  "author": "{{{ AUTHOR }}}",
-  "license": "{{{ LICENSE }}}",
-{{ #REPO_URL }}
+  "author": "<%- locals.author %>",
+  "license": "<%- locals.license %>",
+<% if (locals.repoUrl) { %>
   "repository": {
     "type": "git",
-    "url": "git+{{{ REPO_URL }}}.git"
+    "url": "git+<%- locals.repoUrl %>.git"
   },
   "bugs": {
-    "url": "{{{ REPO_URL }}}/issues"
+    "url": "<%- locals.repoUrl %>/issues"
   },
-{{ /REPO_URL }}
+<% } %>
   "keywords": [
     "capacitor",
     "plugin",
@@ -33,7 +33,7 @@
   ],
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
-    "verify:ios": "xcodebuild -scheme {{{ NATIVE_NAME }}} -destination generic/platform=iOS",
+    "verify:ios": "xcodebuild -scheme <%- locals.nativeName %> -destination generic/platform=iOS",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
     "verify:web": "npm run build",
     "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
@@ -41,17 +41,17 @@
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
     "swiftlint": "node-swiftlint",
-    "docgen": "docgen --api {{ CLASS }}Plugin --output-readme README.md --output-json dist/docs.json",
+    "docgen": "docgen --api <%- locals.class %>Plugin --output-readme README.md --output-json dist/docs.json",
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@capacitor/android": "^{{{ CAPACITOR_VERSION }}}",
-    "@capacitor/core": "^{{{ CAPACITOR_VERSION }}}",
+    "@capacitor/android": "^<%- locals.capacitorVersion %>",
+    "@capacitor/core": "^<%- locals.capacitorVersion %>",
     "@capacitor/docgen": "^0.3.1",
-    "@capacitor/ios": "^{{{ CAPACITOR_VERSION }}}",
+    "@capacitor/ios": "^<%- locals.capacitorVersion %>",
     "@ionic/eslint-config": "^0.4.0",
     "@ionic/prettier-config": "^4.0.0",
     "@ionic/swiftlint-config": "^2.0.0",
@@ -64,7 +64,7 @@
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "@capacitor/core": ">={{{ CAPACITOR_VERSION }}}"
+    "@capacitor/core": ">=<%- locals.capacitorVersion %>"
   },
   "prettier": "@ionic/prettier-config",
   "swiftlint": "@ionic/swiftlint-config",

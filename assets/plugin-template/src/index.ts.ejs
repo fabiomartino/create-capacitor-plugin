@@ -1,0 +1,10 @@
+import { registerPlugin } from '@capacitor/core';
+
+import type { <%- locals.class %>Plugin } from './definitions';
+
+const <%- locals.class %> = registerPlugin<<%- locals.class %>Plugin>('<%- locals.class %>', {
+  web: () => import('./web').then((m) => new m.<%- locals.class %>Web()),
+});
+
+export * from './definitions';
+export { <%- locals.class %> };
